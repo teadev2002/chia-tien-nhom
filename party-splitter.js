@@ -12,12 +12,12 @@
         const memberDiv = document.createElement('div');
         memberDiv.classList.add('mb-3');
         memberDiv.innerHTML = `
-            <label for="member-${memberCount}" class="form-label">Tên thành viên #${memberCount}</label>  &nbsp; <button type="button" style="margin-bottom: 0.4em" class="btn btn-danger btn-sm mt-2 remove-member-btn">Xóa </button>
+            <label for="member-${memberCount}" class="form-label">Tên thành viên #${memberCount}</label>  &nbsp; <button type="button" style="margin-bottom: 0.4em" class="btn btn-danger btn-sm mt-2 remove-member-btn">Xóa </button> &nbsp  &nbsp <label for="member-${memberCount}-is-50-payer" class="form-label">Chọn trả 50%</label>
+            <input type="radio" name="is-50-payer" id="member-${memberCount}-is-50-payer" class="form-check-input">
             <input type="text" class="form-control mb-2" id="member-${memberCount}-name" placeholder="Nhập tên">
             <label for="member-${memberCount}-expense" class="form-label">Đã ứng (VND) (ví dụ: 100k = 100000)</label>
             <input type="number" class="form-control mb-2" id="member-${memberCount}-expense" placeholder="Nhập số tiền">
-            <label for="member-${memberCount}-is-50-payer" class="form-label">Chọn người trả 50%</label>
-            <input type="radio" name="is-50-payer" id="member-${memberCount}-is-50-payer" class="form-check-input">
+           
             
         `;
         membersList.appendChild(memberDiv);
