@@ -6,6 +6,18 @@
 //   const calculateBtnFifty = document.getElementById("calculate-btn");
 //   let memberCount = 0;
 
+//   // Initially hide the 50% calculate button
+//   calculateBtnFifty.style.display = "none";
+
+//   // Function to check if any 50% payer radio is selected
+//   const updateCalculateBtnFiftyVisibility = () => {
+//     const radioButtons = document.querySelectorAll('input[name="is-50-payer"]');
+//     const isAnyChecked = Array.from(radioButtons).some(
+//       (radio) => radio.checked
+//     );
+//     calculateBtnFifty.style.display = isAnyChecked ? "block" : "none";
+//   };
+
 //   // Function to format number with thousand separators
 //   const formatNumber = (num) => {
 //     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -102,7 +114,7 @@
 //             <button type="button" style="margin-bottom: 0.4em" class="btn btn-danger btn-sm mt-2 remove-member-btn">Xóa </button>
 //             <label for="member-${memberCount}-is-50-payer" class="form-label">Chọn trả 50%</label>
 //             <input type="radio" name="is-50-payer" id="member-${memberCount}-is-50-payer" class="form-check-input">
-//             <input type="number" class="form-control mb-2" id="member-${memberCount}-name" placeholder="Nhập tên">
+//             <input type="text" class="form-control mb-2" id="member-${memberCount}-name" placeholder="Nhập tên">
 //             <label for="member-${memberCount}-expense" class="form-label">Đã ứng (VND) (ví dụ: 100k = 100000)</label>
 //             <input type="number" class="form-control mb-2" id="member-${memberCount}-expense" placeholder="Nhập số tiền">
 //         `;
@@ -117,12 +129,19 @@
 //     );
 //     expenseInput.addEventListener("blur", () => formatInputField(expenseInput));
 
+//     // Add event listener for radio button to update button visibility
+//     const radioButton = document.getElementById(
+//       `member-${memberCount}-is-50-payer`
+//     );
+//     radioButton.addEventListener("change", updateCalculateBtnFiftyVisibility);
+
 //     // Add event listener for removing a member
 //     memberDiv
 //       .querySelector(".remove-member-btn")
 //       .addEventListener("click", () => {
 //         memberDiv.remove();
 //         memberCount--;
+//         updateCalculateBtnFiftyVisibility(); // Update visibility after removing member
 //       });
 //   });
 
@@ -235,7 +254,7 @@
 //   });
 // });
 
-// validate input fields =================================
+// update
 document.addEventListener("DOMContentLoaded", () => {
   const membersList = document.getElementById("members-list");
   const resultsDiv = document.getElementById("results");
@@ -244,8 +263,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculateBtnFifty = document.getElementById("calculate-btn");
   let memberCount = 0;
 
-  // Initially hide the 50% calculate button
+  // Initially hide both buttons
+  calculateBtnFair.style.display = "none";
   calculateBtnFifty.style.display = "none";
+
+  // Function to update visibility of "Chia đều" button
+  const updateCalculateBtnFairVisibility = () => {
+    calculateBtnFair.style.display = memberCount > 1 ? "block" : "none";
+  };
 
   // Function to check if any 50% payer radio is selected
   const updateCalculateBtnFiftyVisibility = () => {
@@ -379,8 +404,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .addEventListener("click", () => {
         memberDiv.remove();
         memberCount--;
-        updateCalculateBtnFiftyVisibility(); // Update visibility after removing member
+        updateCalculateBtnFairVisibility(); // Update "Chia đều" button visibility
+        updateCalculateBtnFiftyVisibility(); // Update "Tính tiền 50%" button visibility
       });
+
+    // Update "Chia đều" button visibility after adding a member
+    updateCalculateBtnFairVisibility();
   });
 
   // Function to handle calculations
