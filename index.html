@@ -8,44 +8,87 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-  </head>
-  <style>
-    .note {
-      font-size: 1.3vh;
-    }
-    .img {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
-  <body class="container py-5">
-    <h1 class="mb-4" style="text-align: center; color: rgb(9, 35, 86)">
-      Chia Tiền Nhóm
-    </h1>
+    <style>
+      body {
+        position: relative;
+        min-height: 100vh;
+        background-color: #ffffff;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(0, 0, 0, 0.1) 1px,
+          transparent 0
+        );
+        background-size: 20px 20px;
+        overflow-x: hidden;
+      }
 
-    <div class="mb-4">
-      <button id="add-member-btn" class="btn btn-primary">
-        Thêm thành viên
-      </button>
+      body::before {
+        content: "";
+        position: absolute;
+        top: -200px;
+        left: 0;
+        right: 0;
+        height: 400px;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at top center,
+          rgba(56, 193, 182, 0.5),
+          transparent 70%
+        );
+        filter: blur(80px);
+        pointer-events: none;
+      }
+
+      .note {
+        font-size: 1.3vh;
+      }
+
+      .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+
+  <body class="container py-5">
+    <div class="content">
+      <h1 class="mb-4" style="text-align: center; color: rgb(9, 35, 86)">
+        Chia Tiền Nhóm
+      </h1>
+
+      <div class="mb-4">
+        <button id="add-member-btn" class="btn btn-primary">
+          Thêm thành viên
+        </button>
+      </div>
+      <p class="note">
+        Bấm nút thêm thành viên nhiều lần để thêm nhiều thành viên khác
+      </p>
+      <form id="party-form">
+        <div id="members-list"></div>
+      </form>
+      <hr />
+      <div class="mb-4">
+        <button id="calculate-btn-fair" class="btn btn-success">
+          Chia đều
+        </button>
+        <button id="calculate-btn" class="btn btn-warning">
+          Tính tiền 50%
+        </button>
+      </div>
+      <p class="note">
+        Ghi chú: Không hỗ trợ tính lại sau khi xóa thành viên. <br />
+        Nếu bạn muốn tính lại thì tải lại trang
+      </p>
+      <hr />
+      <div id="results" class="mt-4"></div>
     </div>
-    <p class="note">
-      Bấm nút thêm thành viên nhiều lần để thêm nhiều thành viên khác
-    </p>
-    <form id="party-form">
-      <div id="members-list"></div>
-    </form>
-    <hr />
-    <div class="mb-4">
-      <button id="calculate-btn-fair" class="btn btn-success">Chia đều</button>
-      <button id="calculate-btn" class="btn btn-warning">Tính tiền 50%</button>
-    </div>
-    <p class="note">
-      Ghi chú: Không hỗ trợ tính lại sau khi xóa thành viên. <br />
-      Nếu bạn muốn tính lại thì tải lại trang
-    </p>
-    <hr />
-    <div id="results" class="mt-4"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="party-splitter.js"></script>
